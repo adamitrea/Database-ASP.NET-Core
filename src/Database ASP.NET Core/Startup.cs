@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Database_ASP.NET_Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database_ASP.NET_Core
 {
@@ -34,6 +36,8 @@ namespace Database_ASP.NET_Core
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=Database_ASP.NET_Core;Trusted_Connection=True;";
+            services.AddDbContext<BloggingContext>(options => options.UseSqlServer(connection));
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
